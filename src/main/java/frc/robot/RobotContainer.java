@@ -66,7 +66,7 @@ private final Joystick leftStick = new Joystick(0);
 
 
     // SmartDashboard Buttons
-    SmartDashboard.putData("Drive", new Drive());
+    SmartDashboard.putData("Drive", new Drive(m_driveSub));
     SmartDashboard.putData("Autonomous Command", new AutonomousCommand( m_driveSub ));
     SmartDashboard.putData("Vision", new Vision( m_visionSub ));
     SmartDashboard.putData("ReadyToFire", new ReadyToFire());
