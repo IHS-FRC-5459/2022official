@@ -5,9 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Drive;
+import frc.robot.commands.Vision;
 import frc.robot.subsystems.DriveSub;
 
 /**
@@ -19,6 +21,7 @@ import frc.robot.subsystems.DriveSub;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private Command driveCommand;
+  private Vision pixycam;
   
 
   private RobotContainer m_robotContainer;
@@ -34,6 +37,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     driveCommand = new Drive(m_robotContainer.m_driveSub);
+    pixycam = new Vision();
   }
 
   /**
@@ -92,7 +96,10 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    SmartDashboard.putBoolean("Target In Frame", pixycam.blocksInFrame());
+    
+  }
 
   @Override
   public void testInit() {
