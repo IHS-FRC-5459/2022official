@@ -130,10 +130,8 @@ public class Vision extends CommandBase {
         pixy.getCCC().getBlocks(true, Pixy2CCC.CCC_SIG1, 1);
         ArrayList<Block> blocks = pixy.getCCC().getBlockCache();
 
-        int x = blocks.get(0).getX();
-        int width = blocks.get(0).getWidth();
+        center = blocks.get(0).getX();
 
-        System.out.println("x coord " + x + " width " + width);
 
         
 
