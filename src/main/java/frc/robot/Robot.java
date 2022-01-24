@@ -37,7 +37,11 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     driveCommand = new Drive(m_robotContainer.m_driveSub);
+
     pixycam = new Vision();
+
+
+
   }
 
   /**
@@ -97,7 +101,15 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putBoolean("Target In Frame", pixycam.blocksInFrame());
+
+    try{
+      SmartDashboard.putBoolean("Target In Frame", pixycam.blocksInFrame());
+      SmartDashboard.putNumber("Distance from Center (VISION)", pixycam.findBlockCenter());
+    }catch(Exception e){
+
+    }
+      
+
     
   }
 
