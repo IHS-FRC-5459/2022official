@@ -24,7 +24,7 @@ public class Robot extends TimedRobot {
   private Vision pixycam;
   
 
-  private RobotContainer m_robotContainer;
+  public RobotContainer m_robotContainer;
 
 
   /**
@@ -101,13 +101,19 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+      try{
+        SmartDashboard.putBoolean("Target In Frame", pixycam.blocksInFrame());
+        SmartDashboard.putNumber("Distance from Center (VISION)", pixycam.findBlockCenter());
+        SmartDashboard.putNumber("Block Height", pixycam.blockAngle());
+      }catch(Exception e){
+        System.out.println("Whoops");
+      }
 
-    try{
-      SmartDashboard.putBoolean("Target In Frame", pixycam.blocksInFrame());
-      SmartDashboard.putNumber("Distance from Center (VISION)", pixycam.findBlockCenter());
-    }catch(Exception e){
+      SmartDashboard.putNumber("Angle Adjustment %", pixycam.getAngleAdjust());
+      SmartDashboard.putNumber("Range Adjustment %", pixycam.getRangeAdjust());
 
-    }
+
+
       
 
     
