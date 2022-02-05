@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+    m_robotContainer = RobotContainer.getInstance();
     driveCommand = new Drive(m_robotContainer.m_driveSub);
 
     pixycam = new Vision();
@@ -101,6 +101,8 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+
+    /*
       try{
         SmartDashboard.putBoolean("Target In Frame", pixycam.blocksInFrame());
         SmartDashboard.putNumber("Distance from Center (VISION)", pixycam.findBlockCenter());
@@ -114,8 +116,8 @@ public class Robot extends TimedRobot {
 
 
 
+      */
       
-
     
   }
 

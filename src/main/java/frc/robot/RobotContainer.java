@@ -141,6 +141,7 @@ private Joystick leftStick = null;
     lampOnButton.cancelWhenActive(lampOff);
     */
 
+    /*
     Vision center = new Vision(m_driveSub);
     JoystickButton centerButton = new JoystickButton(rightStick, 7);
     centerButton.whileActiveOnce(center);
@@ -165,7 +166,7 @@ private Joystick leftStick = null;
     y.debounce(0.1).whileActiveContinuous(rangeUp, true);
     xbox8.debounce(0.1).whileActiveContinuous(reset, true);
 
-
+*/
 
 
 
