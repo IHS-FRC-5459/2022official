@@ -28,5 +28,46 @@ public class Constants {
     *   public static final int kRightMotor2Port = 3; 
     * }
     */ 
+
+    public final static int kSensorUnitsPerRotation = 2048;
+
+    
+	/**
+	 * Set to zero to skip waiting for confirmation.
+	 * Set to nonzero to wait and report to DS if action fails.
+	 */
+	public final static int kTimeoutMs = 30;
+
+	/**
+	 * Motor neutral dead-band, set to the minimum 0.1%.
+	 */
+	public final static double kNeutralDeadband = 0.001;
+	
+	/**
+	 * PID Gains may have to be adjusted based on the responsiveness of control loop.
+     * kF: 1023 represents output value to Talon at 100%, 20660 represents Velocity units at 100% output
+     * Not all set of Gains are used in this project and may be removed as desired.
+     * 
+    */
+
+        public final static double ff_kS = 0;
+        public final static double ff_kA = 0;
+        public final static double ff_kV = 0;
+
+
+
+        public static double pid_kP = 0 ;
+
+
+        public static double pid_kI = 0 ;
+
+
+        public static double pid_kD = 0;
+
+
+        public static double kFlywheelRatio = 3.0/1.0;
+
+
+
 }
 
