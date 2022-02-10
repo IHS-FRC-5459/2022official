@@ -26,8 +26,6 @@ public class LoggingSub extends SubsystemBase {
 
   public void clearLogFile()
   {
-
-
     if(logFileFailed)
     {
       printer.print("");

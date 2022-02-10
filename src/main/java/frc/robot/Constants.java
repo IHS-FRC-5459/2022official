@@ -11,6 +11,8 @@
 
 package frc.robot;
 
+import javax.swing.text.PlainDocument;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -66,6 +68,12 @@ public class Constants {
 
 
         public static double kFlywheelRatio = 3.0/1.0;
+
+        public final static double cameraAngle = 40;
+        public final static double cameraHeight = 22/12; //inches
+        public final static double goalHeight = 2;//inches
+        
+
 
 
 
