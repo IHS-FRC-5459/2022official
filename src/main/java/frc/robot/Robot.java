@@ -8,6 +8,9 @@ package frc.robot;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -59,6 +62,11 @@ public class Robot extends TimedRobot {
    * <p>This runs after the mode specific periodic functions, but before LiveWindow and
    * SmartDashboard integrated updating.
    */
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTableEntry tx = table.getEntry("tx");
+  NetworkTableEntry ty = table.getEntry("ty");
+  NetworkTableEntry ta = table.getEntry("ta");
+  NetworkTableEntry tv = table.getEntry("tv");
   @Override
   public void robotPeriodic() {
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
@@ -66,7 +74,17 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-  }
+    pixycam.pixydatatotable();
+    SmartDashboard.putBoolean("Target In Frame",tv.getBoolean(false) );
+    
+    String S="tx="+
+     String.format("%.01f", tx.getNumber(0.00))+
+      " ty=" +
+       String.format("%.01f", ty.getNumber(0.00));
+
+  SmartDashboard.putString("angles", S);        
+ 
+}
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
