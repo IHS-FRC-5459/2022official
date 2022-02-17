@@ -7,6 +7,7 @@ package frc.robot;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -16,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Drive;
+import frc.robot.commands.LinearInterpolator;
 import frc.robot.commands.Vision;
 import frc.robot.subsystems.DriveSub;
 
@@ -30,6 +32,7 @@ public class Robot extends TimedRobot {
   private Command driveCommand;
   private Vision pixycam;
   
+  DecimalFormat df = new DecimalFormat("0.00");
 
   public RobotContainer m_robotContainer;
 
@@ -49,7 +52,6 @@ public class Robot extends TimedRobot {
     m_robotContainer = RobotContainer.getInstance();
     driveCommand = new Drive(m_robotContainer.m_driveSub);
 
-    pixycam = new Vision();
 
 
 
@@ -62,28 +64,40 @@ public class Robot extends TimedRobot {
    * <p>This runs after the mode specific periodic functions, but before LiveWindow and
    * SmartDashboard integrated updating.
    */
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTableEntry tx = table.getEntry("tx");
-  NetworkTableEntry ty = table.getEntry("ty");
-  NetworkTableEntry ta = table.getEntry("ta");
-  NetworkTableEntry tv = table.getEntry("tv");
+  
+
   @Override
   public void robotPeriodic() {
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+
+
     CommandScheduler.getInstance().run();
-    pixycam.pixydatatotable();
-    SmartDashboard.putBoolean("Target In Frame",tv.getBoolean(false) );
+    
     
     String S="tx="+
-     String.format("%.01f", tx.getNumber(0.00))+
+     String.format("%.01f", m_robotContainer.getInstance().m_visionSub.tx)+
       " ty=" +
-       String.format("%.01f", ty.getNumber(0.00));
+       String.format("%.01f", m_robotContainer.getInstance().m_visionSub.ty);
 
-  SmartDashboard.putString("angles", S);        
+  SmartDashboard.putString("angles", S);       
+  
+  SmartDashboard.putString("range: ", df.format(m_robotContainer.m_visionSub.getRange()/12) + "ft");
+  
+  SmartDashboard.putBoolean("target in vision", m_robotContainer.m_visionSub.blocksInFrame());
  
+
+  try
+  {
+      double rpm = LinearInterpolator.calcRPM(m_robotContainer.m_visionSub.getRange());
+      SmartDashboard.putNumber("RPM", rpm);
+
+  }catch(Exception e)
+  {
+      System.out.println(e);
+  }
 }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -143,6 +157,7 @@ public class Robot extends TimedRobot {
 
 
       */
+
       
     
   }

@@ -141,11 +141,12 @@ private Joystick leftStick = null;
     lampOnButton.cancelWhenActive(lampOff);
     */
 
-    /*
+    
     Vision center = new Vision(m_driveSub);
     JoystickButton centerButton = new JoystickButton(rightStick, 7);
     centerButton.whileActiveOnce(center);
 
+    /*
     Vision rangeDown = new Vision("rangeDown");
     Vision angleUp = new Vision("angleUp");
     Vision angleDown = new Vision("angleDown");

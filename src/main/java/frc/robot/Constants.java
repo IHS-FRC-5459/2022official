@@ -56,22 +56,17 @@ public class Constants {
         public final static double ff_kA = 0;
         public final static double ff_kV = 0;
 
-
-
         public static double pid_kP = 0 ;
-
 
         public static double pid_kI = 0 ;
 
-
         public static double pid_kD = 0;
-
 
         public static double kFlywheelRatio = 3.0/1.0;
 
-        public final static double cameraAngle = 40;
-        public final static double cameraHeight = 22/12; //inches
-        public final static double goalHeight = 2;//inches
+        public final static double cameraAngle = 20; //degrees
+        public final static double cameraHeight = 22; //inches
+        public final static double goalHeight = 102;//inches
         
 
 

@@ -6,7 +6,7 @@ public class LinearInterpolator {
     
 
     //range in inches, power in RPM
-    double[][] powerPerRange = {//range first then power
+    static double[][] powerPerRange = {//range first then power
         {60,1000},        
         {120,2000},
         {180,3000},
@@ -14,7 +14,7 @@ public class LinearInterpolator {
     };
 
 
-    public double calcRPM(double inchesFromTarget)
+    public static double calcRPM(double inchesFromTarget)
     {
         double currentRange = inchesFromTarget;//inches
         double RPM = 0;
@@ -32,7 +32,7 @@ public class LinearInterpolator {
             closeHigher = 3;
         }
 
-        if(closeLower == -1 || closeHigher == -1)
+        if(closeLower == -1 && closeHigher == -1)
         {
             return 0;
         }else{
