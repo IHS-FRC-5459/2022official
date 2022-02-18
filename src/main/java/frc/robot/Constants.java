@@ -64,7 +64,7 @@ public class Constants {
 
         public static double kFlywheelRatio = 3.0/1.0;
 
-        public final static double cameraAngle = 20; //degrees
+        public final static double cameraAngle = 33; //degrees
         public final static double cameraHeight = 22; //inches
         public final static double goalHeight = 102;//inches
         

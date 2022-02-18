@@ -59,7 +59,7 @@ public class Drive extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_DriveSub.drive(leftJoystick.getY(), rightJoystick.getY());
+        m_DriveSub.drive(-leftJoystick.getY(), -rightJoystick.getY() * 0.95);
         
     }
 
@@ -67,7 +67,7 @@ public class Drive extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         m_DriveSub.drive(0.0, 0.0);
-    }
+    } 
 
     // Returns true when the command should end.
     @Override

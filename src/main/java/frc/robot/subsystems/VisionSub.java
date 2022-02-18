@@ -179,7 +179,7 @@ rightEnc = new Encoder(2, 3, false, EncodingType.k4X);
     ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
 
         // This method will be called once per scheduler run
-        if(tv > 1.0)
+        if(tv >= 1.0)
         {
             double goalAngle = ty;
             double a1 = Math.toRadians(Constants.cameraAngle);
