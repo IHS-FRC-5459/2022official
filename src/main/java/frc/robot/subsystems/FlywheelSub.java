@@ -58,14 +58,15 @@ public class FlywheelSub extends SubsystemBase {
     /*
 private Encoder flywheelEncoder;
 private TalonSRX flywheelMotor;
-
-WPI_TalonFX flywheelMaster = new WPI_TalonFX(4,"lead");
-WPI_TalonFX flywheelFollow = new WPI_TalonFX(5,"lead");
-TalonFXInvertType masterInvert = TalonFXInvertType.Clockwise; //Same as invert = "false"
-TalonFXInvertType followerInvert = TalonFXInvertType.Clockwise; //Same as invert = "true"
-
-
 */
+
+WPI_TalonFX flywheelMaster = new WPI_TalonFX(6);
+WPI_TalonFX flywheelFollow = new WPI_TalonFX(7);
+SimpleMotorFeedforward feedforward;
+PIDController pid;
+
+
+
 
 LinearInterpolator linearInterpolate = new LinearInterpolator();
 RobotContainer m_robotContainer = RobotContainer.getInstance();
@@ -85,25 +86,52 @@ double rpm = 0;
  //addChild("flywheelEncoder",flywheelEncoder);
  //flywheelEncoder.setDistancePerPulse(1.0);
 
+ feedforward = new SimpleMotorFeedforward(Constants.ff_kS, Constants.ff_kV, Constants.ff_kA);
+            
+ pid = new PIDController(Constants.pid_kP, Constants.pid_kI, Constants.pid_kD);
 
-/*
+
+
+
         flywheelMaster.set(TalonFXControlMode.PercentOutput, 0);
         flywheelFollow.set(TalonFXControlMode.PercentOutput,  0);
         flywheelMaster.setNeutralMode(NeutralMode.Coast);
         flywheelFollow.setNeutralMode(NeutralMode.Coast);
-        flywheelMaster.setInverted(TalonFXInvertType.Clockwise);
-        flywheelFollow.setInverted(TalonFXInvertType.Clockwise);
+        flywheelMaster.setInverted(TalonFXInvertType.CounterClockwise);
+        flywheelFollow.setInverted(TalonFXInvertType.CounterClockwise);
 
 
-*/
+
 
     }
 
 
-/*
+    public double calcSetPoint(){
+        double output = 0;
+
+        output = LinearInterpolator.calcRPM(RobotContainer.getInstance().m_visionSub.getRange());
+
+        return output;
+    }
+
+    public double calcPIDOutput()
+    {
+        double setpoint = calcSetPoint();
+        double output = (MathUtil.clamp(pid.calculate(getRotationsPerMinute(), setpoint), -1, 1)) + feedforward.calculate(Constants.ff_kV, Constants.ff_kA);
+        return output;
+    }
+
+    public double calcPIDOutput(double distance)
+    {
+        double setpoint = LinearInterpolator.calcRPM(distance);
+
+        double output = (MathUtil.clamp(pid.calculate(getRotationsPerMinute(), setpoint), -1, 1)) + feedforward.calculate(Constants.ff_kV, Constants.ff_kA);
+        return output;
+    }
+
     public double getRotationsPerMinute()
     {
-        double RPM = (flywheelMaster.getSelectedSensorVelocity() * 600) / (Constants.kSensorUnitsPerRotation / Constants.kFlywheelRatio);
+        double RPM = (flywheelMaster.getSelectedSensorVelocity() * 600) / (Constants.kSensorUnitsPerRotation);
         return RPM;
     }
     
@@ -112,11 +140,12 @@ double rpm = 0;
         flywheelMaster.set(ControlMode.PercentOutput, pwr);
         flywheelFollow.set(ControlMode.PercentOutput, pwr);
 
-    }*/
+    }
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        getRotationsPerMinute();
 
     }
 

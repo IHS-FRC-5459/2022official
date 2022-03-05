@@ -44,10 +44,11 @@ public class RobotContainer {
 // The robot's subsystems
     public final ClimberSub m_climberSub = new ClimberSub();
     public final IntakeSub m_intakeSub = new IntakeSub();
-    public final HoodSub m_hoodSub = new HoodSub();
     public final FlywheelSub m_flywheelSub = new FlywheelSub();
     public final DriveSub m_driveSub = new DriveSub();
     public final VisionSub m_visionSub = new VisionSub();
+    public final ConveyerSub m_conveyerSub = new ConveyerSub();
+    public final OuttakeConveyerSub m_outakeConveyerSub = new OuttakeConveyerSub();
 
 // Joysticks
 private XboxController xbox = null;
@@ -147,9 +148,12 @@ private Joystick leftStick = null;
     JoystickButton centerButton = new JoystickButton(rightStick, 7);
     centerButton.whileActiveOnce(center);
 
-    spinIntake intakePivotUp = new spinIntake(-0.5, m_intakeSub);
-    spinIntake intakePivotDown = new spinIntake(0.3, m_intakeSub);
-    
+    MoveIntake intakePivotUp = new MoveIntake(-0.75, m_intakeSub);
+    MoveIntake intakePivotDown = new MoveIntake(0.65, m_intakeSub);
+    spinIntake spinIntakeIn = new spinIntake(-0.4, m_intakeSub);
+    SpinFlywheelDumb flywheelSpinny = new SpinFlywheelDumb(m_flywheelSub, 36, 80);
+    MoveConveyer conveyerMove = new MoveConveyer();
+
     JoystickButton intakePivotButtonDown = new JoystickButton(rightStick, 11);
     intakePivotButtonDown.whileHeld(intakePivotDown);
     intakePivotButtonDown.cancelWhenActive(intakePivotUp);
@@ -157,6 +161,17 @@ private Joystick leftStick = null;
     JoystickButton intakePivotButtonUp = new JoystickButton(rightStick, 12);
     intakePivotButtonUp.whileHeld(intakePivotUp);
     intakePivotButtonUp.cancelWhenActive(intakePivotDown);
+
+    JoystickButton spinIntakeInward = new JoystickButton(rightStick,7);
+    spinIntakeInward.toggleWhenPressed(spinIntakeIn);
+    
+    JoystickButton spinFlywheel = new JoystickButton(rightStick, 8);
+    spinFlywheel.whileHeld(flywheelSpinny);
+
+    JoystickButton conveyerButton = new JoystickButton(rightStick, 10);
+    conveyerButton.toggleWhenPressed(conveyerMove);
+
+
     /*
     Vision rangeDown = new Vision("rangeDown");
     Vision angleUp = new Vision("angleUp");

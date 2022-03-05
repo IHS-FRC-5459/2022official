@@ -89,12 +89,12 @@ public class Robot extends TimedRobot {
   SmartDashboard.putBoolean("target in vision", m_robotContainer.m_visionSub.blocksInFrame());
  
 
-  
+  SmartDashboard.putNumber("Flywheel RPM", m_robotContainer.m_flywheelSub.getRotationsPerMinute());
 
   try
   {
       double rpm = LinearInterpolator.calcRPM(m_robotContainer.m_visionSub.getRange());
-      SmartDashboard.putNumber("RPM", rpm);
+      SmartDashboard.putNumber("Needed RPM", rpm);
 
   }catch(Exception e)
   {
@@ -144,6 +144,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
+
+    driveCommand.execute();
     /*
       try{
         SmartDashboard.putBoolean("Target In Frame", pixycam.blocksInFrame());

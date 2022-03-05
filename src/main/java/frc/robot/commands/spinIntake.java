@@ -55,13 +55,19 @@ public class spinIntake extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_intakeSub.intakePivot(m_power);
+
+        
+            m_intakeSub.intakeRoller(m_power);
+
+    
+
+
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_intakeSub.intakePivot(0);
+        m_intakeSub.intakeRoller(0);
 
     }
 

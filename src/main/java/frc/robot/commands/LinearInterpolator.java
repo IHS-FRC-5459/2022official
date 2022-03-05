@@ -7,7 +7,7 @@ public class LinearInterpolator {
 
     //range in inches, power in RPM
     static double[][] powerPerRange = {//range first then power
-        {60,1000},        
+        {60,1000},        //inches to goal, rpm
         {120,2000},
         {180,3000},
         {240,4000}
