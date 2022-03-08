@@ -83,7 +83,7 @@ public class SpinFlywheelDumb extends CommandBase {
     @Override
     public void execute() {
         //double output = m_flywheelSub.calcPIDOutput(m_distance);
-        m_flywheelSub.setMotors(0.2);
+        m_flywheelSub.setMotors(0.75);
 
 
 

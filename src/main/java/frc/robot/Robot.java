@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Drive;
 import frc.robot.commands.LinearInterpolator;
+import frc.robot.commands.SpinFlywheelDumb;
 import frc.robot.commands.Vision;
 import frc.robot.subsystems.DriveSub;
 
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private Command driveCommand;
   private Vision pixycam;
+  SpinFlywheelDumb flywheelSpinny;
   
   DecimalFormat df = new DecimalFormat("0.00");
 
@@ -51,6 +53,8 @@ public class Robot extends TimedRobot {
 
     m_robotContainer = RobotContainer.getInstance();
     driveCommand = new Drive(m_robotContainer.m_driveSub);
+    flywheelSpinny = new SpinFlywheelDumb(m_robotContainer.m_flywheelSub, 36, 80);
+
 
 
 
@@ -166,6 +170,15 @@ public class Robot extends TimedRobot {
 
 
       */
+
+    if(m_robotContainer.getxbox().getRightTriggerAxis() > 0.5)
+    {
+      flywheelSpinny.execute();
+    }else{
+      flywheelSpinny.end(true);
+
+    }
+
 
       
     

@@ -4,23 +4,16 @@
 
 package frc.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class MoveConveyer extends CommandBase {
-  /** Creates a new MoveConveyer. */
-  double m_intakeConveyerPower = 0;
-  double m_outtakeConveyerPower = 0;
-
-
-  public MoveConveyer(double inConveyerPwr, double outConveyerPwr) {
-    m_intakeConveyerPower = inConveyerPwr;
-    m_outtakeConveyerPower = outConveyerPwr;
-
+public class OuttakeConvaer extends CommandBase {
+  /** Creates a new OuttakeConvaer. */
+  double papi;
+  public OuttakeConvaer(double papa) {
+    papi=papa;
     // Use addRequirements() here to declare subsystem dependencies.
- }
+  }
 
   // Called when the command is initially scheduled.
   @Override
@@ -28,19 +21,16 @@ public class MoveConveyer extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    RobotContainer.getInstance().m_conveyerSub.moveIntakeConveyer(m_intakeConveyerPower );
-   
+  public void execute() {  
+    RobotContainer.getInstance().m_outakeConveyerSub.moveOuttakeConveyer(papi);
+
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) 
-  {
-    RobotContainer.getInstance().m_conveyerSub.moveIntakeConveyer(0);
-    
-
+  public void end(boolean interrupted) {
+    RobotContainer.getInstance().m_outakeConveyerSub.moveOuttakeConveyer(0);
 
   }
 

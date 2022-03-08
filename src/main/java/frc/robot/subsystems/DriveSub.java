@@ -87,7 +87,7 @@ right2 = new TalonSRX(3);
  right2.setInverted(false);
 
 
- driveRightEncoder = new Encoder(2, 3, true, EncodingType.k4X);
+ driveRightEncoder = new Encoder(1, 2, true, EncodingType.k4X);
 addChild("DriveRightEncoder",driveRightEncoder);
 driveRightEncoder.setDistancePerPulse(distancePerPulse);
 
