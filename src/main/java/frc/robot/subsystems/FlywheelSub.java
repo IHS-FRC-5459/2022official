@@ -109,7 +109,18 @@ double rpm = 0;
     public double calcSetPoint(){
         double output = 0;
 
-        output = LinearInterpolator.calcRPM(RobotContainer.getInstance().m_visionSub.getRange());
+        double setpoint = LinearInterpolator.calcRPM(RobotContainer.getInstance().m_visionSub.getRange());
+        output = (MathUtil.clamp(pid.calculate(getRotationsPerMinute(), setpoint), -1, 1)) + feedforward.calculate(Constants.ff_kV, Constants.ff_kA);
+
+        return output;
+    }
+
+
+    public double calcFromRPM(double rpm){
+        double output = 0;
+
+        double setpoint = rpm;
+        output = (MathUtil.clamp(pid.calculate(getRotationsPerMinute(), setpoint), -1, 1)) + feedforward.calculate(Constants.ff_kV, Constants.ff_kA);
 
         return output;
     }

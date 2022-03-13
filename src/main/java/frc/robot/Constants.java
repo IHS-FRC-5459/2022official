@@ -11,7 +11,6 @@
 
 package frc.robot;
 
-import javax.swing.text.PlainDocument;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -44,11 +43,11 @@ public class Constants {
 	
 
 
-        public final static double ff_kS = 0;
-        public final static double ff_kA = 0;
-        public final static double ff_kV = 0;
+        public final static double ff_kS = 0.84429;
+        public final static double ff_kA = 0.0065539;
+        public final static double ff_kV = 0.11225;
 
-        public static double pid_kP = 0 ;
+        public static double pid_kP = 0.11732;
 
         public static double pid_kI = 0 ;
 
@@ -61,7 +60,7 @@ public class Constants {
         public final static double goalHeight = 102;//inches
         
 
-
+ 
 
 
 }
