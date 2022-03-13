@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.AutoRoute;
 import frc.robot.commands.Drive;
 import frc.robot.commands.LinearInterpolator;
 import frc.robot.commands.SpinFlywheelDumb;
@@ -53,8 +54,9 @@ public class Robot extends TimedRobot {
 
     m_robotContainer = RobotContainer.getInstance();
     driveCommand = new Drive(m_robotContainer.m_driveSub);
-    flywheelSpinny = new SpinFlywheelDumb(m_robotContainer.m_flywheelSub, 36, 80);
+    //flywheelSpinny = new SpinFlywheelDumb(m_robotContainer.m_flywheelSub, 36, 80);
 
+    SmartDashboard.putNumber("flywheel pwr", 0);
 
 
 
@@ -85,7 +87,7 @@ public class Robot extends TimedRobot {
      String.format("%.01f", m_robotContainer.getInstance().m_visionSub.tx)+
       " ty=" +
        String.format("%.01f", m_robotContainer.getInstance().m_visionSub.ty);
-
+    SmartDashboard.putNumber("encoder value drivetrain", m_robotContainer.m_driveSub.getEncoderDistance());
   SmartDashboard.putString("angles", S);       
   
   SmartDashboard.putString("range: ", df.format(m_robotContainer.m_visionSub.getRange()/12) + "ft");
@@ -104,6 +106,8 @@ public class Robot extends TimedRobot {
   {
       System.out.println(e);
   }
+  //double pwr = SmartDashboard.getNumber("flywheel pwr", 0);
+  //m_robotContainer.m_flywheelSub.setMotors(pwr);
 }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -116,13 +120,14 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = new AutoRoute();
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
 
     }
+
 
   }
 
@@ -170,17 +175,17 @@ public class Robot extends TimedRobot {
 
 
       */
-
+      /*
     if(m_robotContainer.getxbox().getRightTriggerAxis() > 0.5)
     {
       flywheelSpinny.execute();
     }else{
-      flywheelSpinny.end(true);
+      //flywheelSpinny.end(true);
 
     }
 
 
-      
+      */
     
   }
 

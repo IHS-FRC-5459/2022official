@@ -83,8 +83,8 @@ public class SpinFlywheelVision extends CommandBase {
     
     @Override
     public void execute() {
-        double output = m_flywheelSub.calcPIDOutput();
-        m_flywheelSub.setMotors(output);
+        //double output = m_flywheelSub.calcPIDOutput();
+        m_flywheelSub.setMotors(0.95);
         
 
     }

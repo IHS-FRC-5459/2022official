@@ -11,6 +11,7 @@
 // ROBOTBUILDER TYPE: SequentialCommandGroup.
 
 package frc.robot.commands;
+import frc.robot.RobotContainer;
 import frc.robot.commands.MoveForward;
 import frc.robot.commands.TurnToAngle;
 
@@ -42,7 +43,7 @@ public class AutoRoute extends SequentialCommandGroup {
         //  );
 
             new MoveForward(0.2,36,1),
-            new TurnToAngle(90,5,0.1)
+            new TurnToAngle(85,0.5,0.15)
 
 
         );
