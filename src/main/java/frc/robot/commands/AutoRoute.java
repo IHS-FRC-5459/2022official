@@ -42,8 +42,8 @@ public class AutoRoute extends SequentialCommandGroup {
         //      )    
         //  );
 
-            new MoveForward(0.2,36,1),
-            new TurnToAngle(85,0.5,0.15)
+        new MoveForward(0.2,-36,1)
+
 
 
         );

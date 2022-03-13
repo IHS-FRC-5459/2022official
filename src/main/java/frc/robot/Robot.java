@@ -20,6 +20,7 @@ import frc.robot.commands.AutoRoute;
 import frc.robot.commands.Drive;
 import frc.robot.commands.LinearInterpolator;
 import frc.robot.commands.SpinFlywheelDumb;
+import frc.robot.commands.SpinFlywheelVision;
 import frc.robot.commands.Vision;
 import frc.robot.subsystems.DriveSub;
 
@@ -96,7 +97,7 @@ public class Robot extends TimedRobot {
  
 
   SmartDashboard.putNumber("Flywheel RPM", m_robotContainer.m_flywheelSub.getRotationsPerMinute());
-
+  SmartDashboard.putNumber("Drivebase Distance", m_robotContainer.getInstance().m_driveSub.getEncoderDistance());
   try
   {
       double rpm = LinearInterpolator.calcRPM(m_robotContainer.m_visionSub.getRange());
@@ -128,7 +129,6 @@ public class Robot extends TimedRobot {
 
     }
 
-
   }
 
   /** This function is called periodically during autonomous. */
@@ -147,6 +147,8 @@ public class Robot extends TimedRobot {
 
 
     }
+
+
 
     driveCommand.schedule();
 
