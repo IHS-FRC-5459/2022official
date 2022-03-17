@@ -20,13 +20,15 @@ public class TimedFlywheel extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    wait5Command.schedule();
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    wait5Command.execute();
-    RobotContainer.getInstance().m_flywheelSub.setMotors(0.75);
+    RobotContainer.getInstance().m_flywheelSub.setMotors(0.72);
 
 
     

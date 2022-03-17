@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private Command driveCommand;
   private Vision pixycam;
-  SpinFlywheelDumb flywheelSpinny;
+
   
   DecimalFormat df = new DecimalFormat("0.00");
 
@@ -177,17 +177,17 @@ public class Robot extends TimedRobot {
 
 
       */
-      /*
+      
     if(m_robotContainer.getxbox().getRightTriggerAxis() > 0.5)
     {
-      flywheelSpinny.execute();
+      RobotContainer.getInstance().m_flywheelSub.setMotors(0.78);
     }else{
-      //flywheelSpinny.end(true);
+      RobotContainer.getInstance().m_flywheelSub.setMotors(0);
 
     }
 
 
-      */
+      
     
   }
 

@@ -12,27 +12,29 @@ public class TimedOuttakeConveyer extends CommandBase {
   /** Creates a new TimedOuttakeConveyer. */
 
   WaitCommand wait2Command;
-  WaitCommand wait3Command;
+  WaitCommand wait5Command;
   public TimedOuttakeConveyer() {
     // Use addRequirements() here to declare subsystem dependencies.
      wait2Command = new WaitCommand(2);
-     wait3Command = new WaitCommand(3);
+     wait5Command = new WaitCommand(5);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
+  public void initialize() {    
+    wait2Command.schedule();
+    wait5Command.schedule();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    wait2Command.execute();
     if(wait2Command.isFinished())
     {
-      wait3Command.execute();
-      RobotContainer.getInstance().m_outakeConveyerSub.moveOuttakeConveyer(-0.15);
+      RobotContainer.getInstance().m_outakeConveyerSub.moveOuttakeConveyer(-0.5);
+      RobotContainer.getInstance().m_conveyerSub.moveIntakeConveyer(-0.0);
 
     }
 
@@ -43,13 +45,14 @@ public class TimedOuttakeConveyer extends CommandBase {
   public void end(boolean interrupted) {
 
       RobotContainer.getInstance().m_outakeConveyerSub.moveOuttakeConveyer(0);
+      RobotContainer.getInstance().m_conveyerSub.moveIntakeConveyer(0);
 
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(wait3Command.isFinished()){
+    if(wait5Command.isFinished() && wait2Command.isFinished()){
       return true;
     }
 

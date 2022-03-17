@@ -144,46 +144,53 @@ private Joystick leftStick = null;
     */
 
     
-    Vision center = new Vision(m_driveSub);
-    JoystickButton centerButton = new JoystickButton(rightStick, 7);
-    centerButton.whileActiveOnce(center);
+
 
     MoveIntake intakePivotUp = new MoveIntake(-0.75, m_intakeSub);
     MoveIntake intakePivotDown = new MoveIntake(0.65, m_intakeSub);
     spinIntake spinIntakeIn = new spinIntake(-0.4, m_intakeSub);
     spinIntake spinIntakeOut = new spinIntake(0.4, m_intakeSub);
-    OuttakeConvaer spinach = new OuttakeConvaer(-0.1569);
-    SpinFlywheelVision flywheelSpinny = new SpinFlywheelVision(m_flywheelSub);
+    OuttakeConvaer outakeConveyerIn = new OuttakeConvaer(-0.6);
+    OuttakeConvaer outakeConveyerOut = new OuttakeConvaer(0.6);
 
 
-    MoveConveyer conveyerMoveIn = new MoveConveyer(-0.5, -0.3);
-    MoveConveyer conveyerMoveOut = new MoveConveyer(0.5, 0.3);
 
-    //JoystickButton OuttakeConvaerButton = new JoystickButton(xbox, 6); 
-    JoystickButton OuttakeConvaerButton = new JoystickButton(rightStick, 6); 
-    OuttakeConvaerButton.whileHeld(spinach);
+    MoveConveyer conveyerMoveIn = new MoveConveyer(-0.6, -0.31);
+    MoveConveyer conveyerMoveOut = new MoveConveyer(0.6, 0.3);
 
-    //JoystickButton intakePivotButtonDown = new JoystickButton(xbox, 3);
-    JoystickButton intakePivotButtonDown = new JoystickButton(rightStick, 12);
+    JoystickButton OuttakeConvaerButton = new JoystickButton(xbox, 6); 
+    //JoystickButton OuttakeConvaerButton = new JoystickButton(rightStick, 6); 
+    OuttakeConvaerButton.whileHeld(outakeConveyerIn);
+    OuttakeConvaerButton.whileHeld(conveyerMoveIn);
+
+    JoystickButton intakePivotButtonDown = new JoystickButton(xbox, 3);
+    //JoystickButton intakePivotButtonDown = new JoystickButton(rightStick, 12);
     intakePivotButtonDown.whileHeld(intakePivotDown);
     intakePivotButtonDown.cancelWhenActive(intakePivotUp);
 
-    //JoystickButton intakePivotButtonUp = new JoystickButton(xbox, 4);
+    JoystickButton intakePivotButtonUp = new JoystickButton(xbox, 4);
 
-    JoystickButton intakePivotButtonUp = new JoystickButton(rightStick, 11);
+    //JoystickButton intakePivotButtonUp = new JoystickButton(rightStick, 11);
     intakePivotButtonUp.whileHeld(intakePivotUp);
     intakePivotButtonUp.cancelWhenActive(intakePivotDown);
 
-    //JoystickButton spinIntakeInward = new JoystickButton(xbox, 1);
-    JoystickButton spinIntakeInward = new JoystickButton(rightStick, 7);
+
+    JoystickButton button6 = new JoystickButton(xbox, 5);
+    button6.whileHeld(outakeConveyerOut);
+    button6.whileHeld(conveyerMoveOut);
+
+
+    JoystickButton spinIntakeInward = new JoystickButton(xbox, 1);
+    //JoystickButton spinIntakeInward = new JoystickButton(rightStick, 7);
     spinIntakeInward.toggleWhenPressed(spinIntakeIn);
     
-    JoystickButton spinFlywheelButton = new JoystickButton(rightStick, 4);
-    spinFlywheelButton.toggleWhenPressed(flywheelSpinny);
+    //JoystickButton spinFlywheelButton = new JoystickButton(rightStick, 4);
+    //spinFlywheelButton.toggleWhenPressed(flywheelSpinny);
 
-    //JoystickButton conveyerButton = new JoystickButton(xbox, 1);
-    JoystickButton conveyerButton = new JoystickButton(rightStick, 8);
+    JoystickButton conveyerButton = new JoystickButton(xbox, 1);
+    //JoystickButton conveyerButton = new JoystickButton(rightStick, 8);
     conveyerButton.toggleWhenPressed(conveyerMoveIn);
+    conveyerButton.toggleWhenPressed(outakeConveyerOut);
     conveyerButton.cancelWhenPressed(spinIntakeOut);
     conveyerButton.cancelWhenPressed(conveyerMoveOut);
 

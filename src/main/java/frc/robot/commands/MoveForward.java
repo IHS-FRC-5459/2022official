@@ -58,9 +58,9 @@ public class MoveForward extends CommandBase {
     @Override
     public void execute() {
         
-        double yawIntensity = (RobotContainer.getInstance().m_driveSub.getGyroAngle())/100;
-        RobotContainer.getInstance().m_driveSub.drive((targetIntensity + yawIntensity),(targetIntensity - yawIntensity));
-        distanceTravelled = RobotContainer.getInstance().m_driveSub.getEncoderDistance();
+        double yawIntensity = -1 * (RobotContainer.getInstance().m_driveSub.getGyroAngle())/100;
+        RobotContainer.getInstance().m_driveSub.drive(-1 * (targetIntensity + yawIntensity),-1 * (targetIntensity - yawIntensity));
+        distanceTravelled = -1 * RobotContainer.getInstance().m_driveSub.getEncoderDistance();
 
 
     }
