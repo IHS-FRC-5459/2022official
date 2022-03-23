@@ -6,48 +6,64 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
-public class TimedFlywheel extends CommandBase {
+public class TimedDrive extends CommandBase {
+  double pwr;     
+  double time;
+  WaitCommand waittime; 
 
-  WaitCommand wait5Command;
-  /** Creates a new TimedFlywheel. */
-  public TimedFlywheel() {
+  /** Creates a new TimedDrive. */
+  public TimedDrive(double pwr, double time) {
     // Use addRequirements() here to declare subsystem dependencies.
-    wait5Command = new WaitCommand(5);
+    this.pwr = pwr;
+    this.time = time;
+    waittime = new WaitCommand(time);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    wait5Command.schedule();
+    waittime.schedule();
+    RobotContainer.getInstance().m_driveSub.drive(0, 0);
+    RobotContainer.getInstance().m_driveSub.resetGyro();
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.getInstance().m_flywheelSub.setMotors(0.65);
+    double yaw =     RobotContainer.getInstance().m_driveSub.getGyroAngle()/100;
+    if(pwr < 0)
+    {
+      RobotContainer.getInstance().m_driveSub.drive(pwr + yaw, pwr - yaw);
 
+    }else{
+      RobotContainer.getInstance().m_driveSub.drive(pwr - yaw, pwr + yaw);
 
-    
+    }
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.getInstance().m_flywheelSub.setMotors(0);
+    RobotContainer.getInstance().m_driveSub.drive(0, 0);
+    RobotContainer.getInstance().m_driveSub.resetGyro();
+
 
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(wait5Command.isFinished()){
+    if(waittime.isFinished())
+    {
       return true;
     }
 
-    return false;  
-  }  
+    return false;
+  }
 }

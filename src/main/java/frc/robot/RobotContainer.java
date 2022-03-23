@@ -160,7 +160,7 @@ private Joystick leftStick = null;
     spinIntake spinIntakeIn = new spinIntake(-0.4, m_intakeSub);
     spinIntake spinIntakeOut = new spinIntake(0.4, m_intakeSub);
     OuttakeConvaer outakeConveyerIn = new OuttakeConvaer(-0.6);
-    OuttakeConvaer outakeConveyerOut = new OuttakeConvaer(0.6);
+    OuttakeConvaer outakeConveyerOut = new OuttakeConvaer(0.4);
 
 
 
@@ -204,12 +204,16 @@ private Joystick leftStick = null;
     conveyerButton.cancelWhenPressed(conveyerMoveOut);
 
 
-    JoystickButton reverseIntake = new JoystickButton(rightStick, 2);
+    JoystickButton reverseIntake = new JoystickButton(xbox, 2);
     reverseIntake.toggleWhenPressed(spinIntakeOut);
-    JoystickButton conveyerOut = new JoystickButton(rightStick, 2);
+    JoystickButton conveyerOut = new JoystickButton(xbox, 2);
     conveyerOut.toggleWhenPressed(conveyerMoveOut);
     conveyerOut.cancelWhenPressed(conveyerMoveIn);
     conveyerOut.cancelWhenPressed(spinIntakeIn);
+
+
+
+    //-------
 
     JoystickButton winchReleaseButton = new JoystickButton(xboxClimber, 3);
     ClimberWinchRelease winchRelease = new ClimberWinchRelease();
@@ -222,7 +226,7 @@ private Joystick leftStick = null;
     winchInButton.whileHeld(climberWinch);
     winchInButton.cancelWhenActive(winchRelease);
 
-    ClimberPivot pivotUp = new ClimberPivot(0.75);
+    ClimberPivot pivotUp = new ClimberPivot(1);
     ClimberPivot pivotDown = new ClimberPivot(-0.75);
     JoystickButton pivotClimberUpButton = new JoystickButton(xboxClimber, 2);
     pivotClimberUpButton.whenActive(pivotUp);

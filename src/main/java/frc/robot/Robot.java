@@ -178,9 +178,10 @@ public class Robot extends TimedRobot {
 
       */
       
+
     if(m_robotContainer.getxbox().getRightTriggerAxis() > 0.5)
     {
-      RobotContainer.getInstance().m_flywheelSub.setMotors(0.78);
+      RobotContainer.getInstance().m_flywheelSub.setMotors(0.666); //change flywheel speed here :)
     }else{
       RobotContainer.getInstance().m_flywheelSub.setMotors(0);
 

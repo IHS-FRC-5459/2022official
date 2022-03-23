@@ -70,7 +70,7 @@ TalonFXConfiguration winchConfig = new TalonFXConfiguration();
         pivotFollow.setIdleMode(IdleMode.kBrake);
         pivotFollow.setIdleMode(IdleMode.kBrake);
 
-        pivotFollow.follow(pivotLead);
+
     
 
 
@@ -94,6 +94,7 @@ TalonFXConfiguration winchConfig = new TalonFXConfiguration();
     public void pivot(double pwr)
     {
         pivotLead.set(pwr);
+        pivotFollow.set(pwr);
     }
 
     public void winchTighten()

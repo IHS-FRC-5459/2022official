@@ -34,7 +34,7 @@ public class TimedOuttakeConveyer extends CommandBase {
     if(wait2Command.isFinished())
     {
       RobotContainer.getInstance().m_outakeConveyerSub.moveOuttakeConveyer(-0.5);
-      RobotContainer.getInstance().m_conveyerSub.moveIntakeConveyer(-0.0);
+      RobotContainer.getInstance().m_conveyerSub.moveIntakeConveyer(-0.6);
 
     }
 

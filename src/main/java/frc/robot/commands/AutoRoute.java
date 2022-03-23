@@ -41,9 +41,12 @@ public class AutoRoute extends SequentialCommandGroup {
         //          new command3(argsN, subsystem)
         //      )    
         //  );
+        //new MoveForward(0.4,27.666,1),
+        new TimedDrive(-0.35, 1.1),
         new EjectAuto(),
-        new MoveForward(0.4,96,1)
-
+        //new MoveForward(0.4,36,1)
+        new TimedDrive(-0.4, 1.5)
+ 
 
 
         );
