@@ -84,43 +84,7 @@ public class Vision extends CommandBase {
     @Override
     public void execute() {
 
-        if(mode != null)
-        {
-            try{
-                if(mode.equals("rangeUp"))
-                {
-                    m_robotContainer.m_visionSub.adjustRange(1);
-                }
-    
-                if(mode.equals("rangeDown"))
-                {
-                    m_robotContainer.m_visionSub.adjustRange(-1);
-    
-                }
-    
-                if(mode.equals("angleUp"))
-                {
-                    m_robotContainer.m_visionSub.adjustAngle(1);
-    
-                }
-    
-                if(mode.equals("angleDown"))
-                {
-                    m_robotContainer.m_visionSub.adjustAngle(-1);
-    
-                }
-    
-                if(mode.equals("reset"))
-                {
-                    m_robotContainer.m_visionSub.resetAdjustments();
-                }
-                
-            }catch(Exception e){
-                
-            }
 
-        }
-        
         if(m_driveSub != null){
             if(blocksInFrame()){
                 

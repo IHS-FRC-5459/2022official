@@ -81,8 +81,7 @@ intakePivot = new TalonSRX(4);
     {
         intakePivot.set(ControlMode.PercentOutput, pwr);
         intakePivotTwo.set(ControlMode.PercentOutput, pwr);
-        i++;
-        System.out.println(pwr + "  " + i);
+        System.out.println(pwr);
     }
 
     public void intakeRoller(double pwr)

@@ -14,7 +14,7 @@ public class TimedFlywheel extends CommandBase {
   /** Creates a new TimedFlywheel. */
   public TimedFlywheel() {
     // Use addRequirements() here to declare subsystem dependencies.
-    wait5Command = new WaitCommand(5);
+    wait5Command = new WaitCommand(3);
 
   }
 

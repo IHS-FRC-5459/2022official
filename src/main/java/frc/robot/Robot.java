@@ -88,9 +88,8 @@ public class Robot extends TimedRobot {
      String.format("%.01f", m_robotContainer.getInstance().m_visionSub.tx)+
       " ty=" +
        String.format("%.01f", m_robotContainer.getInstance().m_visionSub.ty);
-    SmartDashboard.putNumber("encoder value drivetrain", m_robotContainer.m_driveSub.getEncoderDistance());
-  SmartDashboard.putString("angles", S);       
   
+
   SmartDashboard.putString("range: ", df.format(m_robotContainer.m_visionSub.getRange()/12) + "ft");
   
   SmartDashboard.putBoolean("target in vision", m_robotContainer.m_visionSub.blocksInFrame());
