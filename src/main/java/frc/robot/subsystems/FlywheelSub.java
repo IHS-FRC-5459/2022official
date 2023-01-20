@@ -116,10 +116,10 @@ double rpm = 0;
     }
 
 
-    public double calcFromRPM(double rpm){
+    public double calcFromRPM(double revpermin){
         double output = 0;
 
-        double setpoint = rpm;
+        double setpoint = revpermin;
         output = (MathUtil.clamp(pid.calculate(getRotationsPerMinute(), setpoint), -1, 1)) + feedforward.calculate(Constants.ff_kV, Constants.ff_kA);
 
         return output;
