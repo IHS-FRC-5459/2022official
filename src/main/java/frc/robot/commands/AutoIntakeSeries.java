@@ -6,64 +6,55 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
-public class TimedDrive extends CommandBase {
-  double pwr;     
-  double time;
-  WaitCommand waittime; 
+public class AutoIntakeSeries extends CommandBase {
+  WaitCommand clock = new WaitCommand(2);
+  WaitCommand clock2 = new WaitCommand(2.15);
+  WaitCommand endClock;
 
-  /** Creates a new TimedDrive. */
-  public TimedDrive(double pwr, double time) {
+  /** Creates a new AutoIntakeSeries. */
+  public AutoIntakeSeries(double seconds) {
+    endClock = new WaitCommand(seconds);
     // Use addRequirements() here to declare subsystem dependencies.
-    this.pwr = pwr;
-    this.time = time;
-    waittime = new WaitCommand(time);
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.getInstance().m_driveSub.resetGyro();
-    waittime.schedule();
-    RobotContainer.getInstance().m_driveSub.drive(0, 0);
-
+    clock.schedule();
+    clock2.schedule();
+    endClock.initialize();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double yaw =     RobotContainer.getInstance().m_driveSub.getGyroAngle()/100;
-    if(pwr < 0)
-    {
-      RobotContainer.getInstance().m_driveSub.drive(pwr + yaw, pwr - yaw);
+     RobotContainer.getInstance().m_intakeSub.intakeRoller(-0.7);
+      RobotContainer.getInstance().m_conveyerSub.moveIntakeConveyer(-0.4);
+      RobotContainer.getInstance().m_outakeConveyerSub.moveOuttakeConveyer(0.31);    
 
-    }else{
-      RobotContainer.getInstance().m_driveSub.drive(pwr + yaw, pwr - yaw);
 
-    }
 
+  
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.getInstance().m_driveSub.drive(0, 0);
-    RobotContainer.getInstance().m_driveSub.resetGyro();
-
+    RobotContainer.getInstance().m_intakeSub.intakeRoller(0);
+    RobotContainer.getInstance().m_conveyerSub.moveIntakeConveyer(0);
+    RobotContainer.getInstance().m_outakeConveyerSub.moveOuttakeConveyer(0);
 
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(waittime.isFinished())
+    if(endClock.isFinished())
     {
       return true;
     }
-
     return false;
   }
 }

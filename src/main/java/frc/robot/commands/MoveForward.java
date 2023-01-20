@@ -57,10 +57,16 @@ public class MoveForward extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        
-        double yawIntensity = -1 * (RobotContainer.getInstance().m_driveSub.getGyroAngle())/100;
-        RobotContainer.getInstance().m_driveSub.drive(-1 * (targetIntensity + yawIntensity),-1 * (targetIntensity - yawIntensity));
-        distanceTravelled = -1 * RobotContainer.getInstance().m_driveSub.getEncoderDistance();
+        if(m_goalDistance < 0){
+            double yawIntensity = -1 * (RobotContainer.getInstance().m_driveSub.getGyroAngle())/100;
+            RobotContainer.getInstance().m_driveSub.drive(-1 * (targetIntensity + yawIntensity),-1 * (targetIntensity  - yawIntensity));
+            distanceTravelled = RobotContainer.getInstance().m_driveSub.getEncoderDistance();
+        }else{
+            double yawIntensity =  (RobotContainer.getInstance().m_driveSub.getGyroAngle())/100;
+            RobotContainer.getInstance().m_driveSub.drive((targetIntensity + yawIntensity),(targetIntensity - yawIntensity));
+            distanceTravelled = RobotContainer.getInstance().m_driveSub.getEncoderDistance();
+        }
+
 
 
     }
@@ -79,10 +85,18 @@ public class MoveForward extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if(distanceTravelled > m_goalDistance - tolerance)
-        {
-            return true;
+        if(m_goalDistance > 0){
+            if(distanceTravelled > m_goalDistance - tolerance)
+            {
+                return true;
+            }
+        }else{
+            if(distanceTravelled < m_goalDistance + tolerance)
+            {
+                return true;
+            }
         }
+
         return false;
     }
 
